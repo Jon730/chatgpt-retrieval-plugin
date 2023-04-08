@@ -4,6 +4,8 @@ import os
 import json
 import argparse
 import asyncio
+import csv
+import sys  
 
 from models.models import Document, DocumentMetadata, Source
 from datastore.datastore import DataStore
@@ -13,6 +15,7 @@ from services.file import extract_text_from_filepath
 from services.pii_detection import screen_text_for_pii
 
 DOCUMENT_UPSERT_BATCH_SIZE = 50
+csv.field_size_limit(sys.maxsize)
 
 
 async def process_file_dump(
@@ -33,12 +36,14 @@ async def process_file_dump(
         for filename in files:
             if len(documents) % 20 == 0:
                 print(f"Processed {len(documents)} documents")
+                # if len(documents) == 20:
+                #     break
 
             filepath = os.path.join(root, filename)
 
             try:
                 extracted_text = extract_text_from_filepath(filepath)
-                print(f"extracted_text from {filepath}")
+                #print(f"extracted_text from {filepath}")
 
                 # create a metadata object with the source and source_id fields
                 metadata = DocumentMetadata(
@@ -89,7 +94,7 @@ async def process_file_dump(
         # Get the text of the chunks in the current batch
         batch_documents = [doc for doc in documents[i : i + DOCUMENT_UPSERT_BATCH_SIZE]]
         print(f"Upserting batch of {len(batch_documents)} documents, batch {i}")
-        print("documents: ", documents)
+        #print("documents: ", documents)
         await datastore.upsert(batch_documents)
 
     # delete all files in the dump directory
