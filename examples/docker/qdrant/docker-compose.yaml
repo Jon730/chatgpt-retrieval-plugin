@@ -1,9 +1,12 @@
+# run with 
+version: '3.8'
+
 services:
   retrieval-app:
     build:
       context: ../../../
       dockerfile: Dockerfile
-    image: openai/chatgpt-retrieval-plugin
+    image: jon730/chatgpt-retrieval-plugin
     ports:
       - "80:8000"
     depends_on:
@@ -15,3 +18,8 @@ services:
       OPENAI_API_KEY: "${OPENAI_API_KEY}"
   qdrant:
     image: qdrant/qdrant:v1.0.3
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+volumes:
+  qdrant-data:
