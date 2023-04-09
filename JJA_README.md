@@ -1,4 +1,5 @@
 ## notes
+before using docker compose synchronise the github repo so the latest changes are in the remote
 up and down
 cd examples/docker/qdrant/; docker-compose up -d
 docker-compose -f examples/docker/qdrant/docker-compose.yaml up -d
@@ -23,7 +24,9 @@ docker run -it --rm -v qdrant_qdrant-data:/qdrant/storage busybox sh
     1.1 Command line (preferred as it uses the Docker Volume)
         1.1.1 docker run --rm --name=qdrant_tmp --hostname=3cdbfbc9d21d --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=TZ=Etc/UTC --env=RUN_MODE=production --workdir=/qdrant -p 6333:6333 -p 6334:6334 -v qdrant_qdrant-data:/qdrant/storage --restart=no --label='desktop.docker.io/wsl-distro=Ubuntu-20.04' --runtime=runc -d qdrant/qdrant:v1.0.3
 
-1. 'poetry run start'
+1. start the app
+    1.1 debug app
+    1.1 'poetry run start'
 
 
 ## for debugging
