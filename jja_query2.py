@@ -2,7 +2,7 @@ import os
 import requests
 import json
 
-url = "http://127.0.0.1:8000/query"
+url = "http://localhost:6333/query"
 headers = {"Authorization": "Bearer " + os.getenv("BEARER_TOKEN"), "Content-Type": "application/json"}
 
 data = {
@@ -22,5 +22,5 @@ data = {
     ]
 }
 
-response = requests.post(url, headers=headers, data=json.dumps(data))
-print(response.json())
+response = requests.post(url, headers=headers, data=data)
+print(response)

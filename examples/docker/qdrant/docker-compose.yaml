@@ -1,4 +1,6 @@
 # run with 
+# backup the data:
+  # sudo tar -czvf "/mnt/g/my drive/work/triple prime/qdrant_data_backup.tar.gz" /var/lib/docker/volumes/qdrant_qdrant-data/_data
 version: '3.8'
 
 services:
